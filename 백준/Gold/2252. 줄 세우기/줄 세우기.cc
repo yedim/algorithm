@@ -9,15 +9,11 @@ int main()
 	cin >> n >> m;
 
 	vector< vector<int> > v(n + 1);
+	vector<int> indegree(n + 1, 0);
 	for (int i = 0; i < m; i++) {
 		cin >> a >> b;
 		v[a].push_back(b);
-	}
-
-	vector<int> indegree(n + 1, 0);
-	for (int i = 1; i <= n; i++) {
-		for (int j = 0; j < v[i].size(); j++)
-			indegree[v[i][j]]++;
+		indegree[b]++;
 	}
 
 	queue<int> q;
@@ -30,11 +26,10 @@ int main()
 		int front = q.front();
 		q.pop();
 		cout << front << " ";
-		for (int i = 0; i < v[front].size(); i++) {
-			int index = v[front][i];
-			indegree[index]--;
-			if (indegree[index] == 0)
-				q.push(index);
+		for (int i : v[front]) {
+			indegree[i]--;
+			if (indegree[i] == 0)
+				q.push(i);
 		}
 	}
 	cout << "\n";
