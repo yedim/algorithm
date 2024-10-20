@@ -41,11 +41,9 @@ int main()
 	for (long i = start + 1; i <= start + n; i++)
 		cin >> tree[i];
 
-	long i = size - 1;
-	while (i > 0) {
-		tree[i / 2] = min(tree[i], tree[i - 1]);
-		i -= 2;
-	}
+	long i = size;
+	while (--i != 0)
+		tree[i / 2] = min(tree[i], tree[i / 2]);
 
 	for (long i = 0; i < m; i++) {
 		long a, b;
